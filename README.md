@@ -16,6 +16,11 @@ https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/
 
 ### 3. Starting the Ethereum docker image
 
+```javascript
+var s = "JavaScript syntax highlighting";
+alert(s);
+```
+
 ### 4. Play around with Ethereum!
 
 ### 5. Writing a simple smart contract in solidity
