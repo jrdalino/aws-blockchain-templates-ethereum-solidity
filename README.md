@@ -115,10 +115,10 @@ truffle(development)> Lease.deployed().then(function(instance) { app = instance 
 Now we can read the values of the lessor, lessee, start and end date and amounts like this
 
 ```
-app.lessee()
+app.lessor()
 // => 'Jose Dalino'
 
-app.lessor()
+app.lessee()
 // => 'Juan Dela Cruz'
 
 app.startDate()
