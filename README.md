@@ -142,6 +142,9 @@ Perform the following:
 - Create an IAM Role for Amazon ECS and EC2 Instance Profile
 - Create a Bastion Host
 
+Details can be found here:
+https://docs.aws.amazon.com/blockchain-templates/latest/developerguide/blockchain-template-getting-started-prerequisites.html
+
 ### 2. Run AWS Blockchain Cloudformation Template for Ethereum
 Download and run the CF Tempate from here:
 
