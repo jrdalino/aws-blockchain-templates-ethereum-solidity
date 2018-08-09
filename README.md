@@ -149,7 +149,7 @@ https://aws-blockchain-templates-us-east-1.s3.us-east-1.amazonaws.com/ethereum/t
 
 ### 3. Modify your truffle.js file
 ```
-$ vi migrations/2_deploy_contracts.js
+$ vi truffle.js
 ```
 
 Replace code with this
