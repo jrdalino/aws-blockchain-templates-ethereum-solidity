@@ -1,35 +1,156 @@
 # Introduction to Ethereum Decentralized Application (DAPP)
+This is a simple 30-minute hands-on tutorial on how to write a details of a lease agreement smart contract on a Private Ethereum blockchain.
 
-This is a simple 45 minute tutorial on Ethereum and a hands-on tutorial on how to write your name to a smart contract on the Ethereum blockchain.
+Follow the steps below to download, install and run this project.
 
 ## Part 1: Overview of Blockchains and Ethereum
-Slides can be found here https://github.com/onggunhao/qtum-intro/raw/master/new_qtum_prezi_v2.1.1.pdf
+Slides can be found here https://github.com/jrdalino/lease/raw/master/deploying-a-dapp-aws-blockchain-templates.pdf
 
-## Part 2: Hands on Practice
-### 1. Installing Docker Community Edition
-Install the Docker Community Edition on your Mac/Windows/Linux computer using the instructions at the following link:
+## Part 2: Dependencies
+Install these prerequisites to follow along.
+•	NPM: https://nodejs.org
+•	Truffle: https://github.com/trufflesuite/truffle
+•	Ganache: http://truffleframework.com/ganache/
+•	(Optional) IDE: Visual Studio Code
+•	(Optional) Syntax Highlighting for your IDE: Solidity for VS Code
+•	(Optional) Metamask: https://metamask.io/
 
-https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/
-
-### 2. Pulling the Ethereum Docker image
-[sudo] docker pull hayeah/qtumportal:latest
-
-### 3. Starting the Ethereum docker image
-
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
+## Part 3.a: Clone and Run the Project
+### 1. Clone the project
+```
+git clone https://github.com/jrdalino/lease
 ```
 
-### 4. Play around with Ethereum!
+### 2. Install dependencies
+```
+$ cd lease
+$ npm install
+```
 
-### 5. Writing a simple smart contract in solidity
+### 3. Start Ganache
+Open the Ganache GUI client that you downloaded and installed. This will start your local blockchain instance.
 
-### 6. Creating an address to deploy smart contract from
+### 4. Compile & Deploy Lease Smart Contract Locally
+```
+$ truffle migrate –reset –-network development
+```
 
-### 7. Deploying smart contract to Ethereum (qcli, solar)
+You must migrate the lease smart contract each time your restart ganache.
 
-### 8. Using Ethereum ABI explorer to interact with Ethereum smart contract
+## (Optional) Part 3.b: Setup the project from scratch
+### 1. Create Project Directory
+```
+$ mkdir lease
+$ cd lease
+```
 
-## Part 3: Further Learning
-To learn more, please visit http://xyz.com for the full tutorial. Happy learning!
+### 2. Create Scaffolding
+```
+$ truffle unbox-petshop
+```
+
+### 3. Create New Contract File
+
+```
+$ vi contracts/Lease.sol
+```
+
+Replace code with this
+
+```
+pragma solidity ^0.4.24;
+
+contract Lease {
+    // Read/write lessor and lessee
+    string public lessor;
+    string public lessee;
+    string public startDate;	// change data type
+    string public endDate;	// change data type
+    string public amountUSD;	// change data type
+
+    // Constructor
+    function Lease () public {
+        lessor = "Jose Dalino";
+        lessee = "Juan Dela Cruz";
+        startDate = "January 1, 2019";
+        endDate = "December 31, 2019";
+        amountPerMonthUSD = "3000";
+    }
+}
+```
+
+### 4. Create New Migrations File
+```
+$ vi migrations/2_deploy_contracts.js
+```
+
+Replace code with this
+
+```
+var Lease = artifacts.require("./Lease.sol");
+
+module.exports = function(deployer) {
+  deployer.deploy(Lease);
+};
+```
+
+### 5. Let's run our Migrations
+```
+$ truffle migrate –network development
+```
+
+## Part 4: Let's interact with the Smart Contract
+Run this command:
+
+```
+$ truffle console
+```
+
+Once inside, let’s get an instance of our deployed smart contract and see if we can read the lease details from the contract. From the console, run this code
+
+```
+Lease.deployed().then(function(instance) { app = instance })
+```
+
+Now we can read the values of the lessor, lessee, duration and amounts like this
+
+```
+app.lessee()
+// => 'Jose Dalino'
+
+app.lessor()
+// => 'Juan Dela Cruz'
+
+app.startDate()
+// => 'January 1, 2019'
+
+app.endDate()
+// => 'December 31, 2019'
+
+app.amountPerMonthUSD()
+// => '3000'
+```
+
+Congratulations! You've just written your first smart contract, deployed to the blockchain, and retrieved some of its data.
+
+## Part 5: We're now ready to deploy to AWS
+### 1. AWS Blockchain Template Prerequisites
+Perform the following:
+
+•	Create an Elastic IP Address
+•	Create a VPC and Subnets
+•	Create Security Groups
+•	Create an IAM Role for Amazon ECS and EC2 Instance Profile
+•	Create a Bastion Host
+
+### 2. Run AWS Blockchain Cloudformation Template for Ethereum
+Download and run the CF Tempate from here:
+
+https://aws-blockchain-templates-us-east-1.s3.us-east-1.amazonaws.com/ethereum/templates/latest/ethereum-network.template.yaml
+
+### 3. Compile & Deploy Lease Smart Contract to AWS
+```
+$ truffle migrate ––network awsNetwork
+```
+
+## Part 6: To Do
