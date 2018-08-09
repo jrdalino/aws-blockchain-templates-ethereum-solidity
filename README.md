@@ -8,12 +8,12 @@ Slides can be found here https://github.com/jrdalino/lease/raw/master/deploying-
 
 ## Part 2: Dependencies
 Install these prerequisites to follow along.
-•	NPM: https://nodejs.org
-•	Truffle: https://github.com/trufflesuite/truffle
-•	Ganache: http://truffleframework.com/ganache/
-•	(Optional) IDE: Visual Studio Code
-•	(Optional) Syntax Highlighting for your IDE: Solidity for VS Code
-•	(Optional) Metamask: https://metamask.io/
+- NPM: https://nodejs.org
+- Truffle: https://github.com/trufflesuite/truffle
+- Ganache: http://truffleframework.com/ganache/
+- (Optional) IDE: Visual Studio Code
+- (Optional) Syntax Highlighting for your IDE: Solidity for VS Code
+- (Optional) Metamask: https://metamask.io/
 
 ## Part 3.a: Clone and Run the Project
 ### 1. Clone the project
@@ -136,12 +136,11 @@ Congratulations! You've just written your first smart contract, deployed to the 
 ## Part 5: We're now ready to deploy to AWS
 ### 1. AWS Blockchain Template Prerequisites
 Perform the following:
-
-•	Create an Elastic IP Address
-•	Create a VPC and Subnets
-•	Create Security Groups
-•	Create an IAM Role for Amazon ECS and EC2 Instance Profile
-•	Create a Bastion Host
+- Create an Elastic IP Address
+- Create a VPC and Subnets
+- Create Security Groups
+- Create an IAM Role for Amazon ECS and EC2 Instance Profile
+- Create a Bastion Host
 
 ### 2. Run AWS Blockchain Cloudformation Template for Ethereum
 Download and run the CF Tempate from here:
