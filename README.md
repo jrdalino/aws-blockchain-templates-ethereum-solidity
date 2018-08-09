@@ -109,10 +109,10 @@ $ truffle console
 Once inside, let’s get an instance of our deployed smart contract and see if we can read the lease details from the contract. From the console, run this code
 
 ```
-Lease.deployed().then(function(instance) { app = instance })
+truffle(development)> Lease.deployed().then(function(instance) { app = instance })
 ```
 
-Now we can read the values of the lessor, lessee, duration and amounts like this
+Now we can read the values of the lessor, lessee, start and end date and amounts like this
 
 ```
 app.lessee()
