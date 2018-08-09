@@ -182,4 +182,4 @@ module.exports = {
 $ truffle migrate ––network awsNetwork
 ```
 
-## Part 6: To Do
+## We're done!
