@@ -1,5 +1,5 @@
-# Introduction to Ethereum Decentralized Application (DAPP)
-This is a simple 30-minute hands-on tutorial on how to write a details of a lease agreement smart contract on a Private Ethereum blockchain.
+# Deploying an Ethereum Decentralized Application on AWS using AWS Blockchain Templates
+This is a simple 30-minute hands-on tutorial on how to write a details of a lease agreement smart contract on a Private Ethereum blockchain on Amazon Web Services.
 
 Follow the steps below to download, install and run this project.
 
@@ -11,7 +11,7 @@ Install these prerequisites to follow along.
 - NPM: https://nodejs.org
 - Truffle: https://github.com/trufflesuite/truffle
 - Ganache: http://truffleframework.com/ganache/
-- (Optional) IDE: Visual Studio Code
+- IDE: Visual Studio Code
 - (Optional) Syntax Highlighting for your IDE: Solidity for VS Code
 - (Optional) Metamask: https://metamask.io/
 
@@ -49,15 +49,15 @@ $ cd lease
 $ truffle unbox-petshop
 ```
 
-### 3. Create New Contract File
+### 3. Create a new Contract File
 
 ```
 $ vi contracts/Lease.sol
 ```
 
-Replace code with this
+Replace code with this:
 
-```
+```solidity
 pragma solidity ^0.4.24;
 
 contract Lease {
