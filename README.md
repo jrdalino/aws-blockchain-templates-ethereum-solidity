@@ -86,7 +86,7 @@ $ vi migrations/2_deploy_contracts.js
 
 Replace code with this
 
-```
+```javascript
 var Lease = artifacts.require("./Lease.sol");
 
 module.exports = function(deployer) {
