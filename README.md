@@ -159,7 +159,7 @@ Replace code with this
 
 ```javascript
 const HDWalletProvider = require("truffle-hdwallet-provider-privkey");
-var mnemonic = "outdoor father modify clever trophy abandon vital feel portion grit evolve twist";
+var mnemonic = "outdoor father modify...";
 const privateKeys = ["afd21..."]; // private keys
 
 module.exports = {
