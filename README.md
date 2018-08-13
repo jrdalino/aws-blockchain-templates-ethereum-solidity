@@ -3,7 +3,7 @@ This is a simple 30-minute hands-on tutorial on how to write a details of a leas
 
 Follow the steps below to download, install and run this project.
 
-## Part 1: Overview of Blockchains and Ethereum
+## Part 1: Overview of Blockchain and Ethereum
 Slides can be found here https://github.com/jrdalino/lease/raw/master/deploying-a-dapp-aws-blockchain-templates.pdf
 
 ## Part 2: Dependencies
@@ -13,31 +13,9 @@ Install these prerequisites to follow along.
 - Ganache: http://truffleframework.com/ganache/
 - IDE: Visual Studio Code
 - (Optional) Syntax Highlighting for your IDE: Solidity for VS Code
-- (Optional) Metamask: https://metamask.io/
+- Metamask: https://metamask.io/
 
-## Part 3.a: Clone and Run the Project
-### 1. Clone the project
-```
-git clone https://github.com/jrdalino/lease
-```
-
-### 2. Install dependencies
-```
-$ cd lease
-$ npm install
-```
-
-### 3. Start Ganache
-Open the Ganache GUI client that you downloaded and installed. This will start your local blockchain instance.
-
-### 4. Compile & Deploy Lease Smart Contract Locally
-```
-$ truffle migrate –reset –-network development
-```
-
-You must migrate the lease smart contract each time your restart ganache.
-
-## (Optional) Part 3.b: Setup the project from scratch
+## Part 3: Setup the project from scratch
 ### 1. Create Project Directory
 ```
 $ mkdir lease
@@ -50,31 +28,28 @@ $ truffle unbox-petshop
 ```
 
 ### 3. Create a new Contract File
-
 ```
-$ vi contracts/Lease.sol
+$ vi contracts/LeaseProperty.sol
 ```
 
 Replace code with this:
-
 ```solidity
 pragma solidity ^0.4.24;
 
-contract Lease {
-    // Read/write lessor and lessee
-    string public lessor;
-    string public lessee;
-    string public startDate;	// change data type
-    string public endDate;	// change data type
-    string public amountUSD;	// change data type
+contract LeaseProperty {
 
-    // Constructor
-    function Lease () public {
-        lessor = "Jose Dalino";
-        lessee = "Juan Dela Cruz";
-        startDate = "January 1, 2019";
-        endDate = "December 31, 2019";
-        amountPerMonthUSD = "3000";
+    address[16] public lessees;
+
+    // Lease a property
+    function lease(uint propertyId) public returns (uint) {
+        require(propertyId >= 0 && propertyId <= 15);
+        lessees[propertyId] = msg.sender;
+        return propertyId;
+    }
+
+    // Retrieving the lessees
+    function getLessees() public view returns (address[16]) {
+        return lessees;
     }
 }
 ```
@@ -85,55 +60,332 @@ $ vi migrations/2_deploy_contracts.js
 ```
 
 Replace code with this
-
 ```javascript
-var Lease = artifacts.require("./Lease.sol");
+var LeaseProperty = artifacts.require("./LeaseProperty.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Lease);
+  deployer.deploy(LeaseProperty);
 };
 ```
 
-### 5. Let's run our Migrations
+### 5. Let's compile our Application
 ```
-$ truffle migrate –network development
-```
-
-## Part 4: Let's interact with the Smart Contract
-Run this command:
-
-```
-$ truffle console
+$ truffle compile
 ```
 
-Once inside, let’s get an instance of our deployed smart contract and see if we can read the lease details from the contract. From the console, run this code
-
+You should see output similar to the following:
 ```
-truffle(development)> Lease.deployed().then(function(instance) { app = instance })
-```
-
-Now we can read the values of the lessor, lessee, start and end date and amounts like this
-
-```
-app.lessor()
-// => 'Jose Dalino'
-
-app.lessee()
-// => 'Juan Dela Cruz'
-
-app.startDate()
-// => 'January 1, 2019'
-
-app.endDate()
-// => 'December 31, 2019'
-
-app.amountPerMonthUSD()
-// => '3000'
+Compiling ./contracts/Migrations.sol...
+Compiling ./contracts/LeaseProperty.sol...
+Writing artifacts to ./build/contracts
 ```
 
-Congratulations! You've just written your first smart contract, deployed to the blockchain, and retrieved some of its data.
+### 5. Before we can migrate our contract to the blockchain, we need to have a blockchain running. For this tutorial, we're going to use Ganache, a personal blockchain for Ethereum development you can use to deploy contracts, develop applications, and run tests
 
-## Part 5: We're now ready to deploy to AWS
+### 6. We can now migrate the contract to our local blockchain
+```
+$ truffle migrate --network development
+```
+
+You should see output similar to the following:
+```
+Using network 'development'.
+
+Running migration: 1_initial_migration.js
+  Deploying Migrations...
+  ... 0xcc1a5aea7c0a8257ba3ae366b83af2d257d73a5772e84393b0576065bf24aedf
+  Migrations: 0x8cdaf0cd259887258bc13a92c0a6da92698644c0
+Saving successful migration to network...
+  ... 0xd7bc86d31bee32fa3988f1c1eabce403a1b5d570340a3a9cdba53a472ee8c956
+Saving artifacts...
+Running migration: 2_deploy_contracts.js
+  Deploying Adoption...
+  ... 0x43b6a6888c90c38568d4f9ea494b9e2a22f55e506a8197938fb1bb6e5eaa5d34
+  Adoption: 0x345ca3e014aaf5dca488057592ee47305d9b3e10
+Saving successful migration to network...
+  ... 0xf36163615f41ef7ed8f4a8f192149a0bf633fe1a2398ce001bf44c43dc7bdda0
+Saving artifacts...
+```
+
+### 7. In Ganache, note that the state of the blockchain has changed. The blockchain now shows that the current block, previously 0, is now 4. In addition, while the first account originally had 100 ether, it is now lower, due to the transaction costs of migration
+
+## Part 4: Testing the smart contract
+### 1. Create New Tests File
+```
+$ vi test/TestLeaseProperty.sol
+```
+
+Replace code with this
+```javascript
+pragma solidity ^0.4.24;
+
+import "truffle/Assert.sol";
+import "truffle/DeployedAddresses.sol";
+import "../contracts/LeaseProperty.sol";
+
+contract TestLeaseProperty {
+    LeaseProperty leaseProperty = LeaseProperty(DeployedAddresses.LeaseProperty());
+
+    // Testing the lease() function
+    function testUserCanLeaseProperty() public {
+        uint returnedId = leaseProperty.lease(8);
+        uint expected = 8;
+        Assert.equal(returnedId, expected, "Lease of property ID 8 should be recorded.");
+    }
+
+    // Testing retrieval of a single property's owner
+    function testGetLesseeAddressByPropertyId() public {
+        // Expected owner is this contract
+        address expected = this;
+        address lessee = leaseProperty.lessees(8);
+        Assert.equal(lessee, expected, "Owner of property ID 8 should be recorded.");
+    }
+
+    // Testing retrieval of all lessors
+    function testGetLesseeAddressByPropertyIdInArray() public {
+        // Expected owner is this contract
+        address expected = this;
+        // Store lessees in memory rather than contract's storage
+        address[16] memory lessees = leaseProperty.getLessees();
+        Assert.equal(lessees[8], expected, "Owner of property ID 8 should be recorded.");
+    }
+}
+```
+### 2. Run the tests
+```
+$ truffle test
+```
+
+If all the tests pass, you'll see console output similar to this:
+```
+ Using network 'development'.
+
+   Compiling ./contracts/LeaseProperty.sol...
+   Compiling ./test/TestLeaseProperty.sol...
+   Compiling truffle/Assert.sol...
+   Compiling truffle/DeployedAddresses.sol...
+
+     TestAdoption
+       ✓ testUserCanLeaseProperty (91ms)
+       ✓ testGetLesseeAddressByPropertyId (70ms)
+       ✓ testGetLesseeAddressByPropertyIdInArray (89ms)
+
+
+     3 passing (670ms)
+```
+
+## Part 5: Let's create a user interface to interact with the smart contract
+### 1. Modify the app.js file, 
+```
+$ vi /src/js/app.js
+```
+
+Replace contents with code below to
+- Instantiate web3, 
+- Instantiate the contract, 
+- Get The Leased Properties and Update The UI,
+- Handle the lease() function
+
+```javascript
+App = {
+  web3Provider: null,
+  contracts: {},
+
+  init: function() {
+    // Load properties.
+    $.getJSON('../properties.json', function(data) {
+      var propertiesRow = $('#propertiesRow');
+      var propertyTemplate = $('#propertyTemplate');
+
+      for (i = 0; i < data.length; i ++) {
+        propertyTemplate.find('.panel-amount').text(data[i].amount);
+        propertyTemplate.find('img').attr('src', data[i].picture);
+        propertyTemplate.find('.property-address').text(data[i].address);
+        propertyTemplate.find('.property-bedrooms').text(data[i].bedrooms);
+        propertyTemplate.find('.property-location').text(data[i].location);
+        propertyTemplate.find('.btn-lease').attr('data-id', data[i].id);
+
+        propertiesRow.append(propertyTemplate.html());
+      }
+    });
+
+    return App.initWeb3();
+  },
+
+  initWeb3: function() {
+    // Is there an injected web3 instance?
+    if (typeof web3 !== 'undefined') {
+      App.web3Provider = web3.currentProvider;
+    } else {
+      // If no injected web3 instance is detected, fall back to Ganache
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+    }
+    web3 = new Web3(App.web3Provider);
+    return App.initContract();
+  },
+
+  initContract: function() {
+    $.getJSON('LeaseProperty.json', function(data) {
+      // Get the necessary contract artifact file and instantiate it with truffle-contract
+      var LeasePropertyArtifact = data;
+      App.contracts.LeaseProperty = TruffleContract(LeasePropertyArtifact);
+
+      // Set the provider for our contract
+      App.contracts.LeaseProperty.setProvider(App.web3Provider);
+
+      // Use our contract to retrieve and mark the leased properties
+      return App.markLeased();
+    });
+
+    return App.bindEvents();
+  },
+
+  bindEvents: function() {
+    $(document).on('click', '.btn-lease', App.handleLease);
+  },
+
+  markLeased: function(lessees, account) {
+    var leasePropertyInstance;
+
+    App.contracts.LeaseProperty.deployed().then(function(instance) {
+      leasePropertyInstance = instance;
+
+      return leasePropertyInstance.getLessees.call();
+    }).then(function(lessees) {
+      for (i = 0; i < lessees.length; i++) {
+        if (lessees[i] !== '0x0000000000000000000000000000000000000000') {
+          $('.panel-property').eq(i).find('button').text('Success').attr('disabled', true);
+        }
+      }
+    }).catch(function(err) {
+      console.log(err.message);
+    });
+  },
+
+  handleLease: function(event) {
+    event.preventDefault();
+
+    var propertyId = parseInt($(event.target).data('id'));
+
+    var leasePropertyInstance;
+
+    web3.eth.getAccounts(function(error, accounts) {
+      if (error) {
+        console.log(error);
+      }
+
+      var account = accounts[0];
+
+      App.contracts.LeaseProperty.deployed().then(function(instance) {
+        leasePropertyInstance = instance;
+
+        // Execute lease as a transaction by sending account
+        return leasePropertyInstance.lease(propertyId, {from: account});
+      }).then(function(result) {
+        return App.markLeased();
+      }).catch(function(err) {
+        console.log(err.message);
+      });
+    });
+  }
+};
+
+$(function() {
+  $(window).load(function() {
+    App.init();
+  });
+});
+```
+
+### 2. Modify the index.html file, 
+```
+$ vi /src/index.html
+```
+
+Replace code this this:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Properties For Lease</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+          <h1 class="text-center">Properties For Lease</h1>
+          <hr/>
+          <br/>
+        </div>
+      </div>
+
+      <div id="propertiesRow" class="row">
+        <!-- PROPERTIES LOAD HERE -->
+      </div>
+    </div>
+
+    <div id="propertyTemplate" style="display: none;">
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="panel panel-default panel-property">
+          <div class="panel-heading">
+            <h3 class="panel-amount">$1000 per week</h3>
+          </div>
+          <div class="panel-body">
+            <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="https://animalso.com/wp-content/uploads/2017/01/Golden-Retriever_6.jpg" data-holder-rendered="true">
+            <br/><br/>
+            <strong>Bedrooms</strong>: <span class="property-bedrooms">3</span><br/>            
+            <strong>Address</strong>: <span class="property-address">123 Main St</span><br/>
+            <strong>Location</strong>: <span class="property-location">Warren, MI</span><br/><br/>
+            <button class="btn btn-default btn-lease" type="button" data-id="0">Lease</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
+```
+
+## Part 6: Interact with the dapp in a browser
+### 1. Install and configure MetaMask
+### 2. Installing and configuring lite-server
+
+## Part 7: Let's use our dapp
+### 1. Start the local web server:
+```
+$ npm run dev
+```
+The dev server will launch and automatically open a new browser tab containing your dapp.
+
+### 2. To use the dapp, click the Lease button on the property of your choice.
+
+### 3. You'll be automatically prompted to approve the transaction by MetaMask. Click Submit to approve the transaction.
+
+### 4. You'll see the button next to the adopted pet change to say "Success" and become disabled, just as we specified, because the property has now been leased.
+
+## Part 8: We're now ready to deploy to AWS
 ### 1. AWS Blockchain Template Prerequisites
 Perform the following:
 - Create an Elastic IP Address
