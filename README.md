@@ -354,7 +354,7 @@ Replace code this this:
             <h3 class="panel-amount">$1000 per week</h3>
           </div>
           <div class="panel-body">
-            <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="https://animalso.com/wp-content/uploads/2017/01/Golden-Retriever_6.jpg" data-holder-rendered="true">
+            <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="https://s3.amazonaws.com/jrdalino-public-images/house.png" data-holder-rendered="true">
             <br/><br/>
             <strong>Bedrooms</strong>: <span class="property-bedrooms">3</span><br/>            
             <strong>Address</strong>: <span class="property-address">123 Main St</span><br/>
