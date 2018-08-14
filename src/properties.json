@@ -1,0 +1,130 @@
+[
+  {
+    "id": 0,
+    "amount": "$750 per week",
+    "picture": "images/house-00.jpeg",
+    "bedrooms": 3,
+    "address": "1 Park Blvd",
+    "location": "Lisco, Alabama"
+  },
+  {
+    "id": 1,
+    "amount": "$650 per week",
+    "picture": "images/house-01.jpeg",
+    "bedrooms": 3,
+    "address": "2 W Ash St ",
+    "location": "Tooleville, West Virginia"
+  },
+  {
+    "id": 2,
+    "amount": "$1250 per week",
+    "picture": "images/house-02.jpeg",
+    "bedrooms": 2,
+    "address": "3 Broadway Ave",
+    "location": "Freeburn, Idaho"
+  },
+  {
+    "id": 3,
+    "amount": "$800 per week",
+    "picture": "images/house-03.jpeg",
+    "bedrooms": 2,
+    "address": "4 Market St",
+    "location": "Camas, Pennsylvania"
+  },
+  {
+    "id": 4,
+    "amount": "$900 per week",
+    "picture": "images/house-04.jpeg",
+    "bedrooms": 2,
+    "address": "5 Cedar Rd",
+    "location": "Gerber, South Dakota"
+  },
+  {
+    "id": 5,
+    "amount": "$1100 per week",
+    "picture": "images/house-05.jpeg",
+    "bedrooms": 3,
+    "address": "6 Elm St",
+    "location": "Innsbrook, Illinois"
+  },
+  {
+    "id": 6,
+    "amount": "$680 per week",
+    "picture": "images/house-06.jpeg",
+    "bedrooms": 3,
+    "address": "7 Island Ave",
+    "location": "Soudan, Louisiana"
+  },
+  {
+    "id": 7,
+    "amount": "$700 per week",
+    "picture": "images/house-07.jpeg",
+    "bedrooms": 3,
+    "address": "8 Imperial Ave",
+    "location": "Jacksonwald, Palau"
+  },
+  {
+    "id": 8,
+    "amount": "$850 per week",
+    "picture": "images/house-08.jpeg",
+    "bedrooms": 2,
+    "address": "9 National St",
+    "location": "Honolulu, Hawaii"
+  },
+  {
+    "id": 9,
+    "amount": "$1120 per week",
+    "picture": "images/house-09.jpeg",
+    "bedrooms": 3,
+    "address": "10 Commercial Rd",
+    "location": "Matheny, Utah"
+  },
+  {
+    "id": 10,
+    "amount": "$900 per week",
+    "picture": "images/house-10.jpeg",
+    "bedrooms": 2,
+    "address": "11 Harrison Rd",
+    "location": "Tyhee, Indiana"
+  },
+  {
+    "id": 11,
+    "amount": "$770 per week",
+    "picture": "images/house-11.jpeg",
+    "bedrooms": 3,
+    "address": "12 Jullian St",
+    "location": "Windsor, Montana"
+  },
+  {
+    "id": 12,
+    "amount": "$1300 per week",
+    "picture": "images/house-12.jpeg",
+    "bedrooms": 3,
+    "address": "13 Irving Ave",
+    "location": "Kingstowne, Nevada"
+  },
+  {
+    "id": 13,
+    "amount": "$450 per week",
+    "picture": "images/house-13.jpeg",
+    "bedrooms": 4,
+    "address": "14 Valley Rd",
+    "location": "Sultana, Massachusetts"
+  },
+  {
+    "id": 14,
+    "amount": "$1000 per week",
+    "picture": "images/house-14.jpeg",
+    "bedrooms": 2,
+    "address": "15 Clay St",
+    "location": "Broadlands, Oregon"
+  },
+  {
+    "id": 15,
+    "amount": "$900 per week",
+    "picture": "images/house-15.jpeg",
+    "bedrooms": 2,
+    "address": "16 Franklin Ave",
+    "location": "Dawn, Wisconsin"
+  }
+]
