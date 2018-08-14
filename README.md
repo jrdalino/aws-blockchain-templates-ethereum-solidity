@@ -62,7 +62,19 @@ contract LeaseProperty {
 }
 ```
 
-### 4.2. Create New Migrations File
+### 4.2. Let's compile our Application
+```
+$ truffle compile
+```
+
+You should see output similar to the following:
+```
+Compiling ./contracts/Migrations.sol...
+Compiling ./contracts/LeaseProperty.sol...
+Writing artifacts to ./build/contracts
+```
+
+### 4.3. Create New Migrations File
 ```
 $ vi migrations/2_deploy_contracts.js
 ```
@@ -74,18 +86,6 @@ var LeaseProperty = artifacts.require("./LeaseProperty.sol");
 module.exports = function(deployer) {
   deployer.deploy(LeaseProperty);
 };
-```
-
-### 4.3. Let's compile our Application
-```
-$ truffle compile
-```
-
-You should see output similar to the following:
-```
-Compiling ./contracts/Migrations.sol...
-Compiling ./contracts/LeaseProperty.sol...
-Writing artifacts to ./build/contracts
 ```
 
 ### 4.4. Before we can migrate our contract to the blockchain, we need to have a blockchain running. For this tutorial, we're going to use Ganache, a personal blockchain for Ethereum development you can use to deploy contracts, develop applications, and run tests
@@ -305,7 +305,7 @@ $(function() {
 });
 ```
 
-### 6.2. Modify the index.html file, 
+### 6.2. Modify the index.html file
 ```
 $ vi /src/index.html
 ```
@@ -378,20 +378,27 @@ Replace code this this:
 
 ## Part 7: Interact with the dapp in a browser
 ### 7.1. Install and configure MetaMask
+- Install MetaMask in your browser.
+- Once installed, you'll see the MetaMask fox icon next to your address bar.
+- Click Accept to accept the Privacy Notice.
+- Then you'll see the Terms of Use. Read them, scrolling to the bottom, and then click Accept there too.
+- Now you'll see the initial MetaMask screen. Click Import Existing DEN.
+- In the box marked Wallet Seed, enter the mnemonic that is displayed in Ganache.
+- Now we need to connect MetaMask to the blockchain created by Ganache. Click the menu that shows "Main Network" and select Custom RPC.
+- In the box titled "New RPC URL" enter http://127.0.0.1:7545 and click Save.
+- Click the left-pointing arrow next to "Settings" to close out of the page and return to the Accounts page.
+
 ### 7.2. Installing and configuring lite-server
 
 ## Part 8: Let's run our dapp
-### 8.1. Start the local web server:
+- Start the local web server:
 ```
 $ npm run dev
 ```
-The dev server will launch and automatically open a new browser tab containing your dapp.
-
-### 8.2. To use the dapp, click the Lease button on the property of your choice.
-
-### 8.3. You'll be automatically prompted to approve the transaction by MetaMask. Click Submit to approve the transaction.
-
-### 8.4. You'll see the button next to the adopted pet change to say "Success" and become disabled, just as we specified, because the property has now been leased.
+- The dev server will launch and automatically open a new browser tab containing your dapp.
+- To use the dapp, click the Lease button on the property of your choice.
+- You'll be automatically prompted to approve the transaction by MetaMask. Click Submit to approve the transaction.
+- You'll see the button next to the adopted pet change to say "Success" and become disabled, just as we specified, because the property has now been leased.
 
 ## Part 9: We're now ready to deploy to AWS
 ### 9.1. AWS Blockchain Template Prerequisites
@@ -442,7 +449,7 @@ module.exports = {
 
 ### 9.4. Compile & Deploy Lease Smart Contract to AWS
 ```
-$ truffle migrate ––network awsNetwork
+$ truffle migrate --network awsNetwork
 ```
 
-## We're done!
+## And we're done!
