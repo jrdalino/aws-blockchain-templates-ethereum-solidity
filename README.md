@@ -22,7 +22,7 @@ Install these prerequisites to follow along.
 - (Optional) Syntax Highlighting for your IDE: Solidity for VS Code
 - Metamask: https://metamask.io/
 
-## Part 3: Write, Compile and Migrate the Smart Contract
+## Part 3: Create Project and Scaffolding
 ### 3.1. Create Project Directory
 ```
 $ mkdir lease
@@ -34,7 +34,8 @@ $ cd lease
 $ truffle unbox-petshop
 ```
 
-### 3.3. Create a new Contract File
+## Part 4: Write, Compile and Migrate the Smart Contract
+### 4.1. Create a new Contract File
 ```
 $ vi contracts/LeaseProperty.sol
 ```
@@ -61,7 +62,7 @@ contract LeaseProperty {
 }
 ```
 
-### 3.4. Create New Migrations File
+### 4.2. Create New Migrations File
 ```
 $ vi migrations/2_deploy_contracts.js
 ```
@@ -75,7 +76,7 @@ module.exports = function(deployer) {
 };
 ```
 
-### 3.5. Let's compile our Application
+### 4.3. Let's compile our Application
 ```
 $ truffle compile
 ```
@@ -87,9 +88,9 @@ Compiling ./contracts/LeaseProperty.sol...
 Writing artifacts to ./build/contracts
 ```
 
-### 3.6. Before we can migrate our contract to the blockchain, we need to have a blockchain running. For this tutorial, we're going to use Ganache, a personal blockchain for Ethereum development you can use to deploy contracts, develop applications, and run tests
+### 4.4. Before we can migrate our contract to the blockchain, we need to have a blockchain running. For this tutorial, we're going to use Ganache, a personal blockchain for Ethereum development you can use to deploy contracts, develop applications, and run tests
 
-### 3.7. We can now migrate the contract to our local blockchain
+### 4.5. We can now migrate the contract to our local blockchain
 ```
 $ truffle migrate --network development
 ```
@@ -114,10 +115,10 @@ Saving successful migration to network...
 Saving artifacts...
 ```
 
-### 3.8. In Ganache, note that the state of the blockchain has changed. The blockchain now shows that the current block, previously 0, is now 4. In addition, while the first account originally had 100 ether, it is now lower, due to the transaction costs of migration
+### 4.6. In Ganache, note that the state of the blockchain has changed. The blockchain now shows that the current block, previously 0, is now 4. In addition, while the first account originally had 100 ether, it is now lower, due to the transaction costs of migration
 
-## Part 4: Testing the smart contract
-### 4.1. Create New Tests File
+## Part 5: Testing the smart contract
+### 5.1. Create New Tests File
 ```
 $ vi test/TestLeaseProperty.sol
 ```
@@ -158,7 +159,7 @@ contract TestLeaseProperty {
     }
 }
 ```
-### 4.2. Run the tests
+### 5.2. Run the tests
 ```
 $ truffle test
 ```
@@ -181,8 +182,8 @@ If all the tests pass, you'll see console output similar to this:
      3 passing (670ms)
 ```
 
-## Part 5: Let's create a user interface to interact with the smart contract
-### 5.1. Modify the app.js file, 
+## Part 6: Let's create a user interface to interact with the smart contract
+### 6.1. Modify the app.js file, 
 ```
 $ vi /src/js/app.js
 ```
@@ -304,7 +305,7 @@ $(function() {
 });
 ```
 
-### 5.2. Modify the index.html file, 
+### 6.2. Modify the index.html file, 
 ```
 $ vi /src/index.html
 ```
@@ -375,25 +376,25 @@ Replace code this this:
 </html>
 ```
 
-## Part 6: Interact with the dapp in a browser
-### 6.1. Install and configure MetaMask
-### 6.2. Installing and configuring lite-server
+## Part 7: Interact with the dapp in a browser
+### 7.1. Install and configure MetaMask
+### 7.2. Installing and configuring lite-server
 
-## Part 7: Let's run our dapp
-### 7.1. Start the local web server:
+## Part 8: Let's run our dapp
+### 8.1. Start the local web server:
 ```
 $ npm run dev
 ```
 The dev server will launch and automatically open a new browser tab containing your dapp.
 
-### 7.2. To use the dapp, click the Lease button on the property of your choice.
+### 8.2. To use the dapp, click the Lease button on the property of your choice.
 
-### 7.3. You'll be automatically prompted to approve the transaction by MetaMask. Click Submit to approve the transaction.
+### 8.3. You'll be automatically prompted to approve the transaction by MetaMask. Click Submit to approve the transaction.
 
-### 7.4. You'll see the button next to the adopted pet change to say "Success" and become disabled, just as we specified, because the property has now been leased.
+### 8.4. You'll see the button next to the adopted pet change to say "Success" and become disabled, just as we specified, because the property has now been leased.
 
-## Part 8: We're now ready to deploy to AWS
-### 8.1. AWS Blockchain Template Prerequisites
+## Part 9: We're now ready to deploy to AWS
+### 9.1. AWS Blockchain Template Prerequisites
 Perform the following:
 - Create an Elastic IP Address
 - Create a VPC and Subnets
@@ -404,12 +405,12 @@ Perform the following:
 Details can be found here:
 https://docs.aws.amazon.com/blockchain-templates/latest/developerguide/blockchain-template-getting-started-prerequisites.html
 
-### 8.2. Run AWS Blockchain Cloudformation Template for Ethereum
+### 9.2. Run AWS Blockchain Cloudformation Template for Ethereum
 Download and run the CF Tempate from here:
 
 https://aws-blockchain-templates-us-east-1.s3.us-east-1.amazonaws.com/ethereum/templates/latest/ethereum-network.template.yaml
 
-### 8.3. Modify your truffle.js file
+### 9.3. Modify your truffle.js file
 ```
 $ vi truffle.js
 ```
@@ -439,7 +440,7 @@ module.exports = {
 };
 ```
 
-### 8.4. Compile & Deploy Lease Smart Contract to AWS
+### 9.4. Compile & Deploy Lease Smart Contract to AWS
 ```
 $ truffle migrate ––network awsNetwork
 ```
