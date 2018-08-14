@@ -3,10 +3,17 @@ This is a simple 30-minute hands-on tutorial on how to write a details of a leas
 
 Follow the steps below to download, install and run this project.
 
-## Part 1: Overview of Blockchain and Ethereum
-Slides can be found here https://github.com/jrdalino/lease/raw/master/deploying-a-dapp-aws-blockchain-templates.pdf
+## Part 1: Overview of Blockchain, Ethereum, Smart Contracts and dApp Demo
+This document will cover the following
+- Setting up the development environment
+- Creating a Truffle project using a Truffle Box
+- Writing the smart contract
+- Compiling and migrating the smart contract
+- Testing the smart contract
+- Creating a user interface to interact with the smart contract
+- Interacting with the dapp in a browser
 
-## Part 2: Dependencies
+## Part 2: Setting up the development environment
 Install these prerequisites to follow along.
 - NPM: https://nodejs.org
 - Truffle: https://github.com/trufflesuite/truffle
@@ -15,19 +22,19 @@ Install these prerequisites to follow along.
 - (Optional) Syntax Highlighting for your IDE: Solidity for VS Code
 - Metamask: https://metamask.io/
 
-## Part 3: Setup the project from scratch
-### 1. Create Project Directory
+## Part 3: Write, Compile and Migrate the Smart Contract
+### 3.1. Create Project Directory
 ```
 $ mkdir lease
 $ cd lease
 ```
 
-### 2. Create Scaffolding
+### 3.2. Create Scaffolding
 ```
 $ truffle unbox-petshop
 ```
 
-### 3. Create a new Contract File
+### 3.3. Create a new Contract File
 ```
 $ vi contracts/LeaseProperty.sol
 ```
@@ -54,7 +61,7 @@ contract LeaseProperty {
 }
 ```
 
-### 4. Create New Migrations File
+### 3.4. Create New Migrations File
 ```
 $ vi migrations/2_deploy_contracts.js
 ```
@@ -68,7 +75,7 @@ module.exports = function(deployer) {
 };
 ```
 
-### 5. Let's compile our Application
+### 3.5. Let's compile our Application
 ```
 $ truffle compile
 ```
@@ -80,9 +87,9 @@ Compiling ./contracts/LeaseProperty.sol...
 Writing artifacts to ./build/contracts
 ```
 
-### 5. Before we can migrate our contract to the blockchain, we need to have a blockchain running. For this tutorial, we're going to use Ganache, a personal blockchain for Ethereum development you can use to deploy contracts, develop applications, and run tests
+### 3.6. Before we can migrate our contract to the blockchain, we need to have a blockchain running. For this tutorial, we're going to use Ganache, a personal blockchain for Ethereum development you can use to deploy contracts, develop applications, and run tests
 
-### 6. We can now migrate the contract to our local blockchain
+### 3.7. We can now migrate the contract to our local blockchain
 ```
 $ truffle migrate --network development
 ```
@@ -107,10 +114,10 @@ Saving successful migration to network...
 Saving artifacts...
 ```
 
-### 7. In Ganache, note that the state of the blockchain has changed. The blockchain now shows that the current block, previously 0, is now 4. In addition, while the first account originally had 100 ether, it is now lower, due to the transaction costs of migration
+### 3.8. In Ganache, note that the state of the blockchain has changed. The blockchain now shows that the current block, previously 0, is now 4. In addition, while the first account originally had 100 ether, it is now lower, due to the transaction costs of migration
 
 ## Part 4: Testing the smart contract
-### 1. Create New Tests File
+### 4.1. Create New Tests File
 ```
 $ vi test/TestLeaseProperty.sol
 ```
@@ -151,7 +158,7 @@ contract TestLeaseProperty {
     }
 }
 ```
-### 2. Run the tests
+### 4.2. Run the tests
 ```
 $ truffle test
 ```
@@ -175,7 +182,7 @@ If all the tests pass, you'll see console output similar to this:
 ```
 
 ## Part 5: Let's create a user interface to interact with the smart contract
-### 1. Modify the app.js file, 
+### 5.1. Modify the app.js file, 
 ```
 $ vi /src/js/app.js
 ```
@@ -297,7 +304,7 @@ $(function() {
 });
 ```
 
-### 2. Modify the index.html file, 
+### 5.2. Modify the index.html file, 
 ```
 $ vi /src/index.html
 ```
@@ -369,24 +376,24 @@ Replace code this this:
 ```
 
 ## Part 6: Interact with the dapp in a browser
-### 1. Install and configure MetaMask
-### 2. Installing and configuring lite-server
+### 6.1. Install and configure MetaMask
+### 6.2. Installing and configuring lite-server
 
-## Part 7: Let's use our dapp
-### 1. Start the local web server:
+## Part 7: Let's run our dapp
+### 7.1. Start the local web server:
 ```
 $ npm run dev
 ```
 The dev server will launch and automatically open a new browser tab containing your dapp.
 
-### 2. To use the dapp, click the Lease button on the property of your choice.
+### 7.2. To use the dapp, click the Lease button on the property of your choice.
 
-### 3. You'll be automatically prompted to approve the transaction by MetaMask. Click Submit to approve the transaction.
+### 7.3. You'll be automatically prompted to approve the transaction by MetaMask. Click Submit to approve the transaction.
 
-### 4. You'll see the button next to the adopted pet change to say "Success" and become disabled, just as we specified, because the property has now been leased.
+### 7.4. You'll see the button next to the adopted pet change to say "Success" and become disabled, just as we specified, because the property has now been leased.
 
 ## Part 8: We're now ready to deploy to AWS
-### 1. AWS Blockchain Template Prerequisites
+### 8.1. AWS Blockchain Template Prerequisites
 Perform the following:
 - Create an Elastic IP Address
 - Create a VPC and Subnets
@@ -397,12 +404,12 @@ Perform the following:
 Details can be found here:
 https://docs.aws.amazon.com/blockchain-templates/latest/developerguide/blockchain-template-getting-started-prerequisites.html
 
-### 2. Run AWS Blockchain Cloudformation Template for Ethereum
+### 8.2. Run AWS Blockchain Cloudformation Template for Ethereum
 Download and run the CF Tempate from here:
 
 https://aws-blockchain-templates-us-east-1.s3.us-east-1.amazonaws.com/ethereum/templates/latest/ethereum-network.template.yaml
 
-### 3. Modify your truffle.js file
+### 8.3. Modify your truffle.js file
 ```
 $ vi truffle.js
 ```
@@ -432,7 +439,7 @@ module.exports = {
 };
 ```
 
-### 4. Compile & Deploy Lease Smart Contract to AWS
+### 8.4. Compile & Deploy Lease Smart Contract to AWS
 ```
 $ truffle migrate ––network awsNetwork
 ```
