@@ -593,6 +593,12 @@ Download and run the CF Tempate from here:
 
 https://aws-blockchain-templates-us-east-1.s3.us-east-1.amazonaws.com/ethereum/templates/latest/ethereum-network.template.yaml
 
+### 9.3. Install Truffle HDWallet Provider Private Key
+https://www.npmjs.com/package/truffle-hdwallet-provider-privkey
+```
+npm install truffle-hdwallet-provider-privkey
+```
+
 ### 9.3. Modify your truffle.js file
 ```
 $ vi truffle.js
