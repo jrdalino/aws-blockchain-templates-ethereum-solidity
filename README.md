@@ -554,7 +554,7 @@ Replace code this this:
 
 ## Part 7: Interact with the dapp in a browser
 ### 7.1. Install and configure MetaMask
-- Install MetaMask in your browser.
+- Install MetaMask in your browser. https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en
 - Once installed, you'll see the MetaMask fox icon next to your address bar.
 - Click Accept to accept the Privacy Notice.
 - Then you'll see the Terms of Use. Read them, scrolling to the bottom, and then click Accept there too.
