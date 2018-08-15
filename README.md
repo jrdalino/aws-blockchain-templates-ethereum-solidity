@@ -69,8 +69,8 @@ $ truffle compile
 
 You should see output similar to the following:
 ```
-Compiling ./contracts/Migrations.sol...
 Compiling ./contracts/LeaseProperty.sol...
+Compiling ./contracts/Migrations.sol...
 Writing artifacts to ./build/contracts
 ```
 
@@ -101,17 +101,17 @@ Using network 'development'.
 
 Running migration: 1_initial_migration.js
   Deploying Migrations...
-  ... 0xcc1a5aea7c0a8257ba3ae366b83af2d257d73a5772e84393b0576065bf24aedf
-  Migrations: 0x8cdaf0cd259887258bc13a92c0a6da92698644c0
+  ... 0xb191d286c9a2fcab68b1218cafc7c40477b3c5c4e5987582b7b53004ae776c5a
+  Migrations: 0x534774eee39ec144dd188399cfb0a49b63c2c005
 Saving successful migration to network...
-  ... 0xd7bc86d31bee32fa3988f1c1eabce403a1b5d570340a3a9cdba53a472ee8c956
+  ... 0x8c282e8b29cb0692ec8d37a36d43986dfbdd684c3af92db6b1f7b6f531e36317
 Saving artifacts...
 Running migration: 2_deploy_contracts.js
-  Deploying Adoption...
-  ... 0x43b6a6888c90c38568d4f9ea494b9e2a22f55e506a8197938fb1bb6e5eaa5d34
-  Adoption: 0x345ca3e014aaf5dca488057592ee47305d9b3e10
+  Deploying LeaseProperty...
+  ... 0x0804a39647b115bf060cd269feff909564e8aac975ba3860c2165bcff73e8f0e
+  LeaseProperty: 0xfa124fc5290ac561b69bcf8a23d4128e7ac22e5d
 Saving successful migration to network...
-  ... 0xf36163615f41ef7ed8f4a8f192149a0bf633fe1a2398ce001bf44c43dc7bdda0
+  ... 0x0d35af9affae169a12bb8cddaca285dc5a0ab2599cc60b46ebea8c1e70e2b0fb
 Saving artifacts...
 ```
 
