@@ -599,7 +599,7 @@ https://www.npmjs.com/package/truffle-hdwallet-provider-privkey
 npm install truffle-hdwallet-provider-privkey
 ```
 
-### 9.3. Modify your truffle.js file
+### 9.4. Modify your truffle.js file
 ```
 $ vi truffle.js
 ```
@@ -628,7 +628,7 @@ module.exports = {
 };
 ```
 
-### 9.4. Compile & Deploy Lease Smart Contract to AWS
+### 9.5. Compile & Deploy Lease Smart Contract to AWS
 ```
 $ truffle migrate --network awsNetwork
 ```
