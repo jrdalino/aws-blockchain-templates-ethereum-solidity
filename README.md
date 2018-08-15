@@ -186,7 +186,7 @@ Compiling truffle/DeployedAddresses.sol...
 ## Part 6: Let's create a user interface to interact with the smart contract
 ### 6.1. Modify the app.js file, 
 ```
-$ vi /src/js/app.js
+$ vi src/js/app.js
 ```
 
 Replace contents with code below to
@@ -308,7 +308,7 @@ $(function() {
 
 ### 6.2. Modify the index.html file
 ```
-$ vi /src/index.html
+$ vi src/index.html
 ```
 
 Replace code this this:
@@ -377,11 +377,14 @@ Replace code this this:
 </html>
 ```
 
-### 6.3.Copy images of houses
+### 6.3.Copy images of houses in this directory ~/src/images/
 
-### 6.4 Create properties.json file
+### 6.4.(Optional) Remove files not needed
+- ~/src/pets.json
+
+### 6.5 Create properties.json file
 ```
-$ vi /src/index.html
+$ vi src/properties.json
 ```
 
 Replace code this this:
@@ -566,7 +569,6 @@ $ vi truffle.js
 ```
 
 Replace code with this
-
 ```javascript
 const HDWalletProvider = require("truffle-hdwallet-provider-privkey");
 var mnemonic = "outdoor father modify...";
