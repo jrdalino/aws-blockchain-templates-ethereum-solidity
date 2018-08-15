@@ -166,20 +166,21 @@ $ truffle test
 
 If all the tests pass, you'll see console output similar to this:
 ```
- Using network 'development'.
+Using network 'development'.
 
-   Compiling ./contracts/LeaseProperty.sol...
-   Compiling ./test/TestLeaseProperty.sol...
-   Compiling truffle/Assert.sol...
-   Compiling truffle/DeployedAddresses.sol...
-
-     TestAdoption
-       ✓ testUserCanLeaseProperty (91ms)
-       ✓ testGetLesseeAddressByPropertyId (70ms)
-       ✓ testGetLesseeAddressByPropertyIdInArray (89ms)
+Compiling ./contracts/LeaseProperty.sol...
+Compiling ./test/TestLeaseProperty.sol...
+Compiling truffle/Assert.sol...
+Compiling truffle/DeployedAddresses.sol...
 
 
-     3 passing (670ms)
+  TestLeaseProperty
+    ✓ testUserCanLeaseProperty (131ms)
+    ✓ testGetLesseeAddressByPropertyId (131ms)
+    ✓ testGetLesseeAddressByPropertyIdInArray (147ms)
+
+
+  3 passing (1s)
 ```
 
 ## Part 6: Let's create a user interface to interact with the smart contract
