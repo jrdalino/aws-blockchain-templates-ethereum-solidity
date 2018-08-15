@@ -574,7 +574,7 @@ $ npm run dev
 - The dev server will launch and automatically open a new browser tab containing your dapp.
 - To use the dapp, click the Lease button on the property of your choice.
 - You'll be automatically prompted to approve the transaction by MetaMask. Click Submit to approve the transaction.
-- You'll see the button next to the adopted pet change to say "Success" and become disabled, just as we specified, because the property has now been leased.
+- You'll see the button next to the leased property change to say "Success" and become disabled, just as we specified, because the property has now been leased.
 
 ## Part 9: We're now ready to deploy to AWS
 ### 9.1. AWS Blockchain Template Prerequisites
