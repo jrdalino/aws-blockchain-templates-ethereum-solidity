@@ -49,6 +49,24 @@ Commands:
   Run dev server: npm run dev
 ```
 
+### 3.3.(Optional) Remove files not needed
+Remove images
+```
+$ rm box-img-lg.png
+$ rm box-img-sm.png
+$ rm src/images/scottish-terrier.jpeg
+$ rm src/images/golden-retriever.jpeg
+$ rm src/images/french-bulldog.jpeg
+$ rm src/images/boxer.jpeg
+$ rm src/pets.json
+```
+
+Remove index.thml and app.js because we will replace these later
+```
+$ rm src/index.html
+$ rm src/js/app.js
+```
+
 ## Part 4: Write, Compile and Migrate the Smart Contract
 ### 4.1. Create a new Contract File
 ```
@@ -393,9 +411,6 @@ Replace code this this:
 ```
 
 ### 6.3.Copy images of houses in this directory ~/src/images/
-
-### 6.4.(Optional) Remove files not needed
-- ~/src/pets.json
 
 ### 6.5 Create properties.json file
 ```
