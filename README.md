@@ -25,13 +25,13 @@ Install these prerequisites to follow along.
 ## Part 3: Create Project and Scaffolding
 ### 3.1. Create Project Directory
 ```
-$ mkdir lease
-$ cd lease
+$ mkdir lease-property
+$ cd lease-property
 ```
 
 ### 3.2. Create Scaffolding
 ```
-$ truffle unbox-petshop
+$ truffle unbox pet-shop
 ```
 
 ## Part 4: Write, Compile and Migrate the Smart Contract
@@ -124,7 +124,7 @@ $ vi test/TestLeaseProperty.sol
 ```
 
 Replace code with this
-```javascript
+```solidity
 pragma solidity ^0.4.24;
 
 import "truffle/Assert.sol";
