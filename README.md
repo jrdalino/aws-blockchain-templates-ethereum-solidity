@@ -34,6 +34,21 @@ $ cd lease-property
 $ truffle unbox pet-shop
 ```
 
+You should see output similar to the following:
+```
+Downloading...
+Unpacking...
+Setting up...
+Unbox successful. Sweet!
+
+Commands:
+
+  Compile:        truffle compile
+  Migrate:        truffle migrate
+  Test contracts: truffle test
+  Run dev server: npm run dev
+```
+
 ## Part 4: Write, Compile and Migrate the Smart Contract
 ### 4.1. Create a new Contract File
 ```
